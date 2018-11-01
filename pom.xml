@@ -55,6 +55,10 @@
                             <artifactId>cas-server-webapp${app.server}</artifactId>
                         </overlay>
                     </overlays>
+                    <dependentWarExcludes>
+                        <!--让war下的json不初始化-->
+                        **/service/*.json
+                    </dependentWarExcludes>
                 </configuration>
             </plugin>
             <plugin>
@@ -107,6 +111,19 @@
             <id>shibboleth-releases</id>
             <url>https://build.shibboleth.net/nexus/content/repositories/releases</url>
         </repository>
+        <!--添加国内镜像源地址-->
+        <repository>
+            <id>maven-ali</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public//</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+        </repository>
     </repositories>
 
     <profiles>
@@ -122,6 +139,11 @@
                     <version>${cas.version}</version>
                     <type>war</type>
                     <scope>runtime</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.apereo.cas</groupId>
+                    <artifactId>cas-server-support-json-service-registry</artifactId>
+                    <version>${cas.version}</version>
                 </dependency>
                 <!--数据库认证相关 start-->
                 <dependency>
