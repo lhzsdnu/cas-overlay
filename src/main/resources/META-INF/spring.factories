@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.pinyougou.cas.config.SpringConfig,\
+  com.pinyougou.cas.config.UserPasswordConfiguration,\
+  com.pinyougou.cas.config.CaptchaWebflowConfiguration,\
+  com.pinyougou.cas.config.DataSourceConfig

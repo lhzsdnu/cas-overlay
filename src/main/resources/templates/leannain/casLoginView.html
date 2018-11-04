@@ -44,6 +44,11 @@
 						</div>
 						<div id="profile" class="tab-pane  active">
 							<form method="post" id="fm1" th:object="${credential}" action="login" class="sui-form">
+
+								<div th:if="${#fields.hasErrors('*')}">
+									<span th:each="err : ${#fields.errors('*')}" th:utext="${err}" style="color: red" />
+								</div>
+
 								<div class="input-prepend"><span class="add-on loginname"></span>
 									<input placeholder="邮箱/用户名/手机号" class="span2 input-xfat"
 										   id="username"
