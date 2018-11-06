@@ -44,9 +44,10 @@ public class UsernamePasswordCaptchaAuthenticationHandler extends AbstractPreAnd
 
         //对浏览器传过来密码进行密码加密
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
+        //$2a$10$Fqn7NKBLVvsRJH7PUPlkY.OlGydjJSHo4.cZfN91vj0qa2aYT72xi
         //可以在这里直接对用户名校验,或者调用 CredentialsMatcher 校验
-        if (!user.get("password").equals(passwordEncoder.encode(myCredential.getPassword()))) {
+        //方法中前一个参数为前端传来的值，后一个为数据库中需要对比的值
+        if (!passwordEncoder.matches(myCredential.getPassword(),user.get("password").toString())) {
             throw new CaptchaErrorException("密码错误！");
         }
 
